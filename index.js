@@ -34,12 +34,14 @@ app.set("view engine", ".hbs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/', async(req,res) => {
-let data = await getWeather();
-let name = data.name;
-let temp = data.main.temp;
-res.render("index", {name, temp});
-});
+app.get('/', async(req, res) => {
+  let data = await getWeather();
+  let name = data.name;
+  let description = data.weather[0].description;
+  let temp = data.main.temp;
+  let feels_like = data.main.feels_like;
+  res.render('index', {name, data: {description, temp, feels_like}});
+  });
 
   // let data = await getPlaceholder();
   // res.render('index', {data, listExists: true});

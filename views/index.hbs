@@ -1,7 +1,15 @@
-<h1>Node Express</h1>
+{{!-- <h1>Node Express</h1>
 <p>Hello {{data.name}} {{data.surName}}</p>
 <p>Ipsum generator insert here</p>
 
 <h1>People</h1>
 
-{{>people}}
+{{>people}} --}}
+
+<h1>Today's Weather in {{name}}:</h1>
+<ul>
+    <li>{{data.description}}</li>
+    <li>Actual temp {{data.temp}}*C</li>
+    <li>Feels like {{data.feels_like}}</li>
+</ul>
+<a class="btn-style" href="/weather">whats the weather</a>
