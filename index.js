@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 
 const path = require("path");
 const getPeople = require("./lib/people");
-const getPlaceholder = require('./lib/getplaceholder');
+const getPlaceholder = require("./lib/getplaceholder");
 const getWeather = require("./lib/weather");
 
 const app = express();
@@ -33,30 +33,30 @@ app.set("views", path.join(__dirname, "views"));
 
 app.set("view engine", ".hbs");
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-
-app.get('/', async(req, res) => {
-  let data = await getWeather();
+app.get("/", async (req, res) => {
+  let data = await getWeather("Manchester", "uk");
   let name = data.name;
   let description = data.weather[0].description;
   let temp = data.main.temp;
   let feels_like = data.main.feels_like;
-  res.render('index', {name, data: {description, temp, feels_like}});
-  });
+  res.render("index", { name, data: { description, temp, feels_like } });
+});
+app.get("/weather", (req, res) => {
+  res.render("weather");
+});
+app.post("/weather", (req, res) => {
+  console.log(req.body);
+  res.render("weather");
+});
 
-  // let data = await getPlaceholder();
-  // res.render('index', {data, listExists: true});
-  // });
-// app.get("/", (req, res) => {
-//   let data = getPeople();
-//   console.log(data);
 
-//   res.render("index", { data, listExists: true });
-// });
+
+
 app.get("/about", (req, res) => {
   res.render("about");
 });
