@@ -6,10 +6,19 @@
 
 {{>people}} --}}
 
-<h1>Today's Weather in {{name}}:</h1>
+{{!-- <h1>Today's Weather in {{name}}:</h1>
 <ul>
     <li>{{data.description}}</li>
     <li>Actual temp {{data.temp}}*C</li>
     <li>Feels like {{data.feels_like}}</li>
+</ul> --}}
+
+<h1>Today's weather in {{name}}:</h1>
+<ul>
+    {{#each data}}
+    <li>{{@key}} : {{this}}</li>
+    {{/each}}
 </ul>
+<br>
+
 <a class="btn-style" href="/weather">whats the weather</a>
