@@ -1,6 +1,7 @@
 const express = require("express");
 
 const hbs = require("express-handlebars");
+const bodyParser = require("body-parser");
 
 const path = require("path");
 const getPeople = require("./lib/people");
@@ -33,6 +34,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", ".hbs");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.get('/', async(req, res) => {
   let data = await getWeather();
