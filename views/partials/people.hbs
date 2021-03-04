@@ -1,0 +1,10 @@
+<div class="people">
+    <h2>List of people</h2>
+    {{#if listExists}}
+    <ul>
+        {{#each data}}
+        <li>{{this.name}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>
