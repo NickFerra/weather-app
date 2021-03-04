@@ -5,6 +5,7 @@ const hbs = require("express-handlebars");
 const path = require("path");
 const getPeople = require("./lib/people");
 const getPlaceholder = require('./lib/getplaceholder');
+const getWeather = require("./lib/weather");
 
 const app = express();
 app.engine(
@@ -34,9 +35,15 @@ app.set("view engine", ".hbs");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get('/', async(req,res) => {
-  let data = await getPlaceholder();
-  res.render('index', {data, listExists: true});
-  });
+let data = await getWeather();
+let name = data.name;
+let temp = data.main.temp;
+res.render("index", {name, temp});
+});
+
+  // let data = await getPlaceholder();
+  // res.render('index', {data, listExists: true});
+  // });
 // app.get("/", (req, res) => {
 //   let data = getPeople();
 //   console.log(data);
