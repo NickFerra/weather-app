@@ -46,16 +46,30 @@ app.get("/", async (req, res) => {
   let feels_like = data.main.feels_like;
   res.render("index", { name, data: { description, temp, feels_like } });
 });
+
 app.get("/weather", (req, res) => {
   res.render("weather");
 });
-app.post("/weather", (req, res) => {
-  console.log(req.body);
-  res.render("weather");
+app.post("/weather", async (req, res) => {
+  let city = req.body.city;
+  let code = req.body.code;
+  let data = await getWeather(city, code);
+  if (data.cod == "404") {
+    res.render("weather", {
+      err: "The provided location doesn't exist",
+    });
+    return;
+  }
+  let name = data.name;
+  let description = data.weather[0].description;
+  let temp = data.main.temp;
+  let feels_like = data.main.feels_like;
+  res.render("weather", {
+    name,
+    data: { description, temp, feels_like },
+    listExists: true,
+  });
 });
-
-
-
 
 app.get("/about", (req, res) => {
   res.render("about");
