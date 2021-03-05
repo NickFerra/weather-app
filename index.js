@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", async (req, res) => {
-  let data = await getWeather("Manchester", "uk");
+  let data = await getWeather("London", "uk");
   let name = data.name;
   let description = data.weather[0].description;
   let temp = data.main.temp;
